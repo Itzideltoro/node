@@ -140,8 +140,10 @@ function entrevistarKoder (koderAEntrevistar, callback) {
     setTimeout (() =>{
         koderAEntrevistar.entrevistado = true
 
-        let error = null 
-        if(koderAEntrevistar)
+        let error = null // el error es nulo por que no hay ningun problema 
+        if(koderAEntrevistar.entrevistado === false){
+            error = "no se pudo Entrevistar" // reasignamos la variable solo si se cumple la condición 
+        }
         callback (error, koderAEntrevistar)
     
     }, 1000)
@@ -152,6 +154,7 @@ function entrevistarKoder (koderAEntrevistar, callback) {
 function ofertarKoder (koderAOfertar, callback ) {
     setTimeout (() =>{
         koderAOfertar.ofertado = true
+        const error = koderAOfertar.ofertado ? null : "No se pudo ofertar "
         callback (error, koderAOfertar)
     
     }, 2000)
@@ -162,6 +165,7 @@ function ofertarKoder (koderAOfertar, callback ) {
 function inscribirKoder (koderAInscribir, callback) {
     setTimeout (() =>{
         koderAInscribir.inscrito = true
+        const error = koderAOfertar.inscrito ? null : "No se pudo inscribir "
         callback (error, koderAInscribir)
         
     }, 2000)
@@ -172,6 +176,7 @@ function inscribirKoder (koderAInscribir, callback) {
 function asistirAClaseKoder (koderAClase, callback) {
     setTimeout (() =>{
         koderAClase.asistioAClase = true
+        const error = koderAOfertar.asistioAClase ? null : "No se pudo asistir a clase "
         callback (error, koderAClase)
         
     }, 3000)
@@ -181,18 +186,12 @@ function asistirAClaseKoder (koderAClase, callback) {
 
 
 
-entrevistarKoder(koder, (koderEntrevistado) => {
-    console.log('Koder entrevistado: ', koderEntrevistado)
+entrevistarKoder(koder, (error, koderEntrevistado) => {
+    if (error) {
 
-   ofertarKoder (koderEntrevistado, (koderOfertado) => {
-    console.log('Koder ofertado ', koderOfertado)
-    inscribirKoder (koderOfertado, (koderInscrito) => {
-        console.log('Koder inscrito ', koderInscrito)
-        asistirAClaseKoder (koderInscrito, (koderAClase) => {
-            console.log('Koder en clase ', koderAClase)
-        })
-    }) 
-   })
+    }
+
 })
 
 
+  
